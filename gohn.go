@@ -7,5 +7,5 @@ import (
 
 func main() {
 	count := flags.ParseFlags()
-	requests.GetTopStoryIDs(count)
+	requests.GetTopStories(count)
 }

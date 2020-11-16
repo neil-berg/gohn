@@ -23,9 +23,9 @@ type Story struct {
 	URL         string `json:"url"`
 }
 
-// GetTopStoryIDs fetches and formats a specified count of top Hacker News
+// GetTopStories fetches and formats a specified count of top Hacker News
 // stories
-func GetTopStoryIDs(count *int) {
+func GetTopStories(count *int) {
 	client := http.Client{Timeout: time.Second * 2}
 	url := "https://hacker-news.firebaseio.com/v0/topstories.json"
 	res, err := client.Get(url)
@@ -76,7 +76,9 @@ func getStories(IDs []int) {
 }
 
 func formatStory(i int, story Story) {
-	// TODO: Format the posted time nicely
-	fmt.Printf("#%d \t%s\n  \tScore:\t %d\n  \tPosted:\t %d\n  \t%s\n\n",
-		i+1, story.Title, story.Score, story.Time, story.URL)
+	t := time.Unix(int64(story.Time), 0)
+	tFmt := fmt.Sprintf("%s %02d, %04d %02d:%02d UTC",
+		t.Month(), t.Day(), t.Year(), t.Hour(), t.Minute())
+	fmt.Printf("#%d \t%s\n  \tScore:\t %d\n  \tPosted:\t %s\n  \t%s\n\n",
+		i+1, story.Title, story.Score, tFmt, story.URL)
 }
