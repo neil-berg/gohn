@@ -1,9 +1,11 @@
 package main
 
 import (
-	"github.com/neil-berg/flags"
+	"github.com/neil-berg/gohn/flags"
+	"github.com/neil-berg/gohn/requests"
 )
 
 func main() {
-	flags.ParseFlags()
+	count := flags.ParseFlags()
+	requests.GetTopStoryIDs(count)
 }

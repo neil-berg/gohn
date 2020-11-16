@@ -2,13 +2,13 @@ package flags
 
 import (
 	"flag"
-	"fmt"
 )
 
 // ParseFlags parses command line arguments to fetch Hacker News stories
-func ParseFlags() {
+func ParseFlags() *int {
 	countPtr := flag.Int("count", 5, "Number of stories to fetch")
+	// TODO: Validate that count is positive
 	flag.Parse()
 
-	fmt.Println("Getting", *countPtr, "stories")
+	return countPtr
 }
