@@ -23,11 +23,22 @@ type Story struct {
 	URL         string `json:"url"`
 }
 
+const baseURL = "https://hacker-news.firebaseio.com/v0/"
+
 // GetTopStories fetches and formats a specified count of top Hacker News
 // stories
-func GetTopStories(count *int) {
+func GetTopStories(count *int, storyType *string) {
+
+	// Mapping between story type and baseURLs
+	URLMap := map[string]string{
+		"top":  "topstories",
+		"ask":  "askstories",
+		"show": "showstories",
+		"job":  "jobstories",
+	}
+
 	client := http.Client{Timeout: time.Second * 2}
-	url := "https://hacker-news.firebaseio.com/v0/topstories.json"
+	url := baseURL + URLMap[*storyType] + ".json"
 	res, err := client.Get(url)
 	if err != nil {
 		panic(err)
@@ -48,10 +59,9 @@ func GetTopStories(count *int) {
 
 func getStories(IDs []int) {
 	client := http.Client{Timeout: time.Second * 2}
-	baseURL := "https://hacker-news.firebaseio.com/v0/item/"
 
 	for i := 0; i < len(IDs); i++ {
-		url := baseURL + strconv.Itoa(IDs[i]) + ".json"
+		url := baseURL + "/item/" + strconv.Itoa(IDs[i]) + ".json"
 		res, err := client.Get(url)
 		if err != nil {
 			log.Fatal(err)

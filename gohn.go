@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	count := flags.ParseFlags()
-	requests.GetTopStories(count)
+	count, storyType := flags.ParseFlags()
+	requests.GetTopStories(count, storyType)
 }
