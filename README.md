@@ -2,7 +2,7 @@
 
 A simple CLI for fetching Hacker News stories.
 
-## Prerequites
+## Prerequisites
 
 [Download and install Go](https://golang.org/doc/install)
 
@@ -25,4 +25,9 @@ The number of stories to fetch and display. Valid values between 1 and 10.
 
 **--type (string)**
 
-The type of stories to query. Valid values are "top", "ask", "show", and "job".
+The type of stories to query. Valid values are:
+
+- `"top"`
+- `"ask"`
+- `"show"`
+- `"job"`
